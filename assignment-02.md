@@ -1,6 +1,6 @@
 # CMPS 2200 Assignment 2
 
-**Name:**_________________________
+**Name:** #Michael Baron
 
 In this assignment we'll work on applying the methods we've learned to analyze recurrences, and also see their behavior
 in practice. As with previous
@@ -16,7 +16,7 @@ Derive asymptotic upper bounds of work for each recurrence below.
 
 * $W(n)=2W(n/3)+1$
 .  
-.  
+.  O(n^(log_3 2))
 . 
 .  
 . 
@@ -25,7 +25,7 @@ Derive asymptotic upper bounds of work for each recurrence below.
  
 * $W(n)=5W(n/4)+n$
 .  
-.
+.O(n^(log_4 5))
 .  
 . 
 .  
@@ -36,7 +36,7 @@ Derive asymptotic upper bounds of work for each recurrence below.
 
 * $W(n)=7W(n/7)+n$
 .  
-. 
+. O(nlogn)
 .  
 .  
 . 
@@ -46,7 +46,7 @@ Derive asymptotic upper bounds of work for each recurrence below.
 * $W(n)=9W(n/3)+n^2$
 .  
 .
-. 
+. O(n^2 logn)
 .  
 . 
 .  
@@ -56,7 +56,7 @@ Derive asymptotic upper bounds of work for each recurrence below.
 
 * $W(n)=8W(n/2)+n^3$
 .  
-.
+.O(n^3 logn)
 .  
 .  
 .  
@@ -68,7 +68,7 @@ Derive asymptotic upper bounds of work for each recurrence below.
 
 * $W(n)=49W(n/25)+n^{3/2}\log n$
 .  
-.  
+. O(n^1.5 logn)
 . 
 .  
 . 
@@ -78,7 +78,7 @@ Derive asymptotic upper bounds of work for each recurrence below.
 
 * $W(n)=W(n-1)+2$
 .  
-.  
+.  O(n)
 . 
 .  
 . 
@@ -88,7 +88,7 @@ Derive asymptotic upper bounds of work for each recurrence below.
 
 * $W(n)= W(n-1)+n^c$, with $c\geq 1$
 .  
-.  
+.  O(n^(c+1))
 .  
 .  
 .  
@@ -98,7 +98,7 @@ Derive asymptotic upper bounds of work for each recurrence below.
 
 * $W(n)=W(\sqrt{n})+1$
 .  
-.  
+.  O(log(logn))
 .  
 .  
 .  
@@ -133,9 +133,20 @@ Suppose that for a given task you are choosing between the following three algor
 .  
 . 
 . 
+Alg A: W(n) = 5w (n/2) + O(n)
+Work = theta(n^log_2 5)
 
+Alg B: W(n) = 2W(n-1) + O(1)
+Work = theta(2^n)
 
+Alg C: W(n) = 9w(n/3) + O(n^2)
+Work = theta(n^2logn)
 
+C is the fastest, then A, and B is the slowest 
+
+I would choose C, the fastest algorithm, or lowest marginal growth as n grows. alg B grows exponential, which means it will be the largest time complexity of each of the 3
+as n grows to infinity. Alg A is about theta(n^2.3) where alg C is theta(n^2 * logn). as n grows infinitively large, the polynomial impact of 2.3 compared to 2 will be much more significant
+than the logn multiplier for alg C. this means Alg A grows faster than Alg C. 
 ## Part 3: Parenthesis Matching
 
 A common task of compilers is to ensure that parentheses are matched. That is, each open parenthesis is followed at some point by a closed parenthesis. Furthermore, a closed parenthesis can only appear if there is a corresponding open parenthesis before it. So, the following are valid:
@@ -160,7 +171,7 @@ Below, we'll solve this problem three different ways, using iterate, scan, and d
 
 **3b.** What are the recurrences for the Work and Span of this solution? What are their Big Oh solutions?
 
-**enter answer here**
+Work and Span are O(n)
 
 .  
 . 
@@ -176,8 +187,8 @@ Below, we'll solve this problem three different ways, using iterate, scan, and d
 
 **3d.** Assume that any `map`s are done in parallel, and that we use the efficient implementation of `scan` from class. What are the recurrences for the Work and Span of this solution? 
 
-**enter answer here**
-
+Work = O(n)
+Span = O(logn)
 .  
 .  
 
@@ -197,7 +208,8 @@ Below, we'll solve this problem three different ways, using iterate, scan, and d
 
 **3f.** Assuming any recursive calls are done in parallel, what are the recurrences for the Work and Span of this solution? What are their Big Oh solutions?
 
-**enter answer here**
+work = 2w(n/2) + O(1)
+span = S(n/2) + O(1)
 
 .  
 . 
