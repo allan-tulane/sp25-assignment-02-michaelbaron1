@@ -26,7 +26,11 @@ def parens_match_iterative(mylist):
     return iterate(parens_update, 0, mylist) == 0
     ###
 
-
+def iterate(par_update,start_count, my_list):
+    count = start_count
+    for i in range(len(my_list)):
+        count = par_update(count, my_list[i])
+    return count
 def parens_update(current_output, next_input):
     """
     This function will be passed to the `iterate` function to 
@@ -43,6 +47,7 @@ def parens_update(current_output, next_input):
     if current_output == -math.inf:  # in an invalid state; carry it forward
         return current_output
     if next_input == '(':            # new open parens 
+        #print(f"{type(current_output)} as {current_output}")
         return current_output + 1
     elif next_input == ')':          # new close parens
         if current_output <= 0:      # close before an open -> invalid
@@ -53,12 +58,9 @@ def parens_update(current_output, next_input):
         return current_output
     ###
 
-
-
-
-
-#### Scan solution
-
+# print(f"iterate test: {parens_match_iterative(['('])}")
+# #### Scan solution
+# print("_________SCAN__________")
 def parens_match_scan(mylist):
     """
     Implement a solution to the parens matching problem using `scan`.
@@ -77,10 +79,23 @@ def parens_match_scan(mylist):
     
     """
     ###TODO
+
+    print(f"list map thing: {list(map(paren_map, mylist))}")
+
     history, last = scan(plus, 0, list(map(paren_map, mylist)))
+    print(f"full: {scan(plus, 0, list(map(paren_map, mylist)))}")
+    print(f"last: {history}")
+    print(f"history: {reduce(min_f, 0, history)}")
     return last == 0 and reduce(min_f, 0, history) >= 0
     ###
 
+def plus(a, b):
+    return a + b
+def reduce(f, id_r, a):
+    count = id_r
+    for i in range(len(a)):
+        count = f(count, a[i])
+    return count
 def scan(f, id_, a):
     """
     This is a horribly inefficient implementation of scan
@@ -88,6 +103,7 @@ def scan(f, id_, a):
     We saw a more efficient version in class. You can assume
     the more efficient version is used for analyzing work/span.
     """
+
     return (
             [reduce(f, id_, a[:i+1]) for i in range(len(a))],
              reduce(f, id_, a)
@@ -122,9 +138,7 @@ def min_f(x,y):
     if x < y:
         return x
     return y
-
-
-
+print(parens_match_scan(['(', 'a', ')']))
 #### Divide and conquer solution
 
 def parens_match_dc(mylist):
@@ -159,7 +173,9 @@ def parens_match_dc_helper(mylist):
             return (1, 0) # one unmatched )    
         else:
             return (0, 0)
+    print("test", parens_match_dc_helper(mylist[:len(mylist)//2]))
     i,j = parens_match_dc_helper(mylist[:len(mylist)//2])
+    print(f"i: {i} j: {j}")
     k,l = parens_match_dc_helper(mylist[len(mylist)//2:])
     # Combination:
     # Return the tuple (R,L) using some combination of the values i,j,k,l defined above.
@@ -170,4 +186,6 @@ def parens_match_dc_helper(mylist):
         return (i + k - j, l)
     ###
     
-
+parens_match_dc_helper(['(', ')'])
+print("____")
+parens_match_dc_helper(['(', 'a', ')', '(', ')'])
