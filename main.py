@@ -83,9 +83,7 @@ def parens_match_scan(mylist):
     print(f"list map thing: {list(map(paren_map, mylist))}")
 
     history, last = scan(plus, 0, list(map(paren_map, mylist)))
-    print(f"full: {scan(plus, 0, list(map(paren_map, mylist)))}")
-    print(f"last: {history}")
-    print(f"history: {reduce(min_f, 0, history)}")
+  
     return last == 0 and reduce(min_f, 0, history) >= 0
     ###
 
@@ -187,5 +185,5 @@ def parens_match_dc_helper(mylist):
     ###
     
 parens_match_dc_helper(['(', ')'])
-print("____")
+
 parens_match_dc_helper(['(', 'a', ')', '(', ')'])
